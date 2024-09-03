@@ -1,12 +1,12 @@
 const express = require('express');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
+require('dotenv').config();
 
 const app = express();
 const port = 3000;
 
 // Configuração do MySQL
-
 const connection = mysql.createConnection({
   host: 'localhost',
   user: process.env.MYSQL_USER, // Usa variáveis de ambiente
@@ -14,11 +14,10 @@ const connection = mysql.createConnection({
   database: process.env.MYSQL_DATABASE
 });
 
-
 // Conectar ao banco de dados
 connection.connect((err) => {
   if (err) throw err;
-  console.log('Conectado ao banco de dados MySQL');
+  //console.log('Conectado ao banco de dados MySQL');
 });
 
 // Middleware para analisar corpos de solicitação
@@ -57,8 +56,8 @@ app.get('/users/:id', (req, res) => {
 
 
 // Iniciar o servidor
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
 
-exports = app
+module.exports = { app, server };
