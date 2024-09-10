@@ -34,7 +34,9 @@ jobs:
       run: npm install
     - name: Start MySQL
       run: sudo /etc/init.d/mysql start
+      
     - name: Run Db
       run: node script_db.js   
+
     - name: Run tests
       run: npm test
